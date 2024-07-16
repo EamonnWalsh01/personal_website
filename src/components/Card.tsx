@@ -1,4 +1,6 @@
+// src/components/Card.tsx
 import React from 'react';
+import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 interface CardProps {
@@ -9,39 +11,76 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ title, description, imageUrl, technologies }) => {
-  const { ref, inView } = useInView({
+  const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true
   });
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 100,
+        damping: 15,
+        when: 'beforeChildren',
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const childVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 150,
+        damping: 15
+      }
+    }
+  };
+
   return (
-    <div 
-      ref={ref} 
-      className={`max-w-sm rounded overflow-hidden shadow-lg bg-white transition-opacity duration-1000 relative ${
-        inView ? 'opacity-100' : 'opacity-0'
-      } hover:shadow-2xl hover:ring-4 hover:ring-blue-300 hover:ring-opacity-50 transform hover:scale-105`}
-      style={{ transition: 'transform 0.3s ease' }}
+    <motion.div 
+      ref={ref}
+      variants={cardVariants}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-2xl transition-shadow duration-300 ease-in-out"
     >
-      <div className="relative w-full" style={{ paddingBottom: '66.67%' }}>
+      <motion.div 
+        className="relative w-full" 
+        style={{ paddingBottom: '66.67%' }}
+        whileHover={{ scale: 1.05 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      >
         <img 
-          className="absolute top-0 left-0 w-full h-full object-cover"
+          className="absolute top-0 left-0 w-full h-full object-cover rounded-t-lg"
           src={imageUrl} 
           alt={title} 
         />
-      </div>
+      </motion.div>
       <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2 text-primary">{title}</div>
-        <p className="text-gray-700 text-base mb-4">{description}</p>
-        <div className="flex flex-wrap">
+        <motion.div variants={childVariants} className="font-bold text-xl mb-2 text-gray-800">{title}</motion.div>
+        <motion.p variants={childVariants} className="text-gray-600 text-base mb-4">{description}</motion.p>
+        <motion.div variants={childVariants} className="flex flex-wrap">
           {technologies.map((tech, index) => (
-            <span key={index} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+            <motion.span 
+              key={index}
+              variants={childVariants}
+              className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+              whileHover={{ scale: 1.1, backgroundColor: '#e2e8f0' }}
+            >
               {tech}
-            </span>
+            </motion.span>
           ))}
-        </div>
+        </motion.div>
       </div>
-      <div className="glow-effect absolute top-0 left-0 w-full h-full rounded-lg pointer-events-none opacity-0"></div>
-    </div>
+    </motion.div>
   );
 };
 
