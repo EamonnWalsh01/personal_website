@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -7,9 +5,10 @@ interface CardProps {
   title: string;
   description: string;
   imageUrl: string;
+  technologies: string[];
 }
 
-const Card: React.FC<CardProps> = ({ title, description, imageUrl }) => {
+const Card: React.FC<CardProps> = ({ title, description, imageUrl, technologies }) => {
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true
@@ -32,13 +31,18 @@ const Card: React.FC<CardProps> = ({ title, description, imageUrl }) => {
       </div>
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2 text-primary">{title}</div>
-        <p className="text-gray-700 text-base">{description}</p>
+        <p className="text-gray-700 text-base mb-4">{description}</p>
+        <div className="flex flex-wrap">
+          {technologies.map((tech, index) => (
+            <span key={index} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+              {tech}
+            </span>
+          ))}
+        </div>
       </div>
-      {/* Apply glow effect on hover */}
       <div className="glow-effect absolute top-0 left-0 w-full h-full rounded-lg pointer-events-none opacity-0"></div>
     </div>
   );
 };
 
 export default Card;
-
