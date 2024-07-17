@@ -1,13 +1,12 @@
-
-// src/App.tsx
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Gallery from './components/Gallery';
 import SkillBar from './components/SkillBar';
 import AnimatedText from './components/AnimatedText';
 import HeadShot from './assets/NIce.jpg';
 
-const App: React.FC = () => {
+const Home: React.FC = () => {
   const skills = [
     { name: 'JavaScript', level: 90 },
     { name: 'Python', level: 85 },
@@ -31,7 +30,6 @@ const App: React.FC = () => {
     hidden: { y: 20, opacity: 0 },
     visible: { y: 0, opacity: 1 }
   };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/10 to-secondary/30">
       <div className="min-h-screen flex flex-col items-center p-8">
@@ -105,6 +103,17 @@ const App: React.FC = () => {
         </motion.main>
       </div>
     </div>
+  );
+};
+const App: React.FC = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/lander" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 };
 
