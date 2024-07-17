@@ -1,11 +1,15 @@
 import React from 'react';
 import Card from './Card';
 
+
+import gestureScienceImage from '../assets/Gesture_Science.png';
+import landingImage from '../assets/landing.png';
+
 const cardsData = [
   {
     title: 'Gesture Control Camera App',
     description: 'Developed a camera application in Rust using gesture recognition technologies and integrated computer vision libraries for accurate gesture detection.',
-    imageUrl: 'https://via.placeholder.com/400?text=Gesture+Control+Camera',
+    imageUrl: gestureScienceImage,
     technologies: ['Rust', 'Computer Vision']
   },
   {
@@ -17,7 +21,7 @@ const cardsData = [
   {
     title: 'Anseo Web App',
     description: 'Led data analysis and modelling for a web application suggesting optimal NYC zip codes for new businesses. Created a predictive model with 85% accuracy and integrated large language models (LLMs).',
-    imageUrl: 'https://via.placeholder.com/400?text=Anseo+Web+App',
+    imageUrl: landingImage,
     technologies: ['Data Analysis', 'Machine Learning', 'LLMs']
   },
 ];

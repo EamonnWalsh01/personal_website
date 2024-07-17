@@ -1,9 +1,11 @@
+
 // src/App.tsx
 import React from 'react';
 import { motion } from 'framer-motion';
 import Gallery from './components/Gallery';
 import SkillBar from './components/SkillBar';
 import AnimatedText from './components/AnimatedText';
+import HeadShot from './assets/NIce.jpg';
 
 const App: React.FC = () => {
   const skills = [
@@ -47,6 +49,15 @@ const App: React.FC = () => {
           </p>
         </motion.header>
 
+        <motion.img
+          src={HeadShot}
+          alt="Eamonn Walsh"
+          className="w-40 h-40 object-cover border-4 border-primary shadow-lg mt-8"
+          initial={{ borderRadius: '50%' }}
+          whileHover={{ borderRadius: '20%' }}
+          transition={{ type: 'spring', stiffness: 300 }}
+        />
+        
         <motion.main 
           className="mt-12 p-8 bg-white shadow-lg rounded-lg w-full max-w-4xl"
           variants={containerVariants}
@@ -98,3 +109,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+
