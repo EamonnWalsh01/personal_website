@@ -9,10 +9,10 @@ import HeadShot from './assets/NIce.jpg';
 const Home: React.FC = () => {
   const skills = [
     { name: 'JavaScript', level: 90 },
-    { name: 'Python', level: 85 },
-    { name: 'C++', level: 75 },
+    { name: 'Python', level: 95 },
+    { name: 'C++', level: 45 },
     { name: 'Java', level: 80 },
-    { name: 'Rust', level: 70 },
+    { name: 'Rust', level: 50 },
   ];
 
   const containerVariants = {
@@ -77,8 +77,8 @@ const Home: React.FC = () => {
                 <SkillBar key={index} name={skill.name} level={skill.level} />
               ))}
             </div>
-            <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
-              {['Web Technologies', 'Databases', 'Tools & Methodologies'].map((category, index) => (
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-2 gap-4">
+              {['Ml & AI Tools','Web Technologies', 'Databases', 'Tools & Methodologies'].map((category, index) => (
                 <motion.div 
                   key={index}
                   className="bg-secondary/20 p-4 rounded-lg border-l-2 border-primary"
@@ -88,6 +88,7 @@ const Home: React.FC = () => {
                   <h3 className="font-semibold text-gray-700 mb-2">{category}</h3>
                   <ul className="text-gray-600 text-sm">
                     {category === 'Web Technologies' && ['HTML', 'CSS', 'React', 'Node.js'].map((tech, i) => <li key={i}>{tech}</li>)}
+{category === 'Ml & AI Tools' && ['Pytorch', 'Tensorflow', 'Advanced Linear Algebra', 'Natural Language Processing'].map((tech, i) => <li key={i}>{tech}</li>)}
                     {category === 'Databases' && ['MySQL', 'PostgreSQL'].map((tech, i) => <li key={i}>{tech}</li>)}
                     {category === 'Tools & Methodologies' && ['Git', 'Docker', 'Agile', 'TDD'].map((tech, i) => <li key={i}>{tech}</li>)}
                   </ul>
